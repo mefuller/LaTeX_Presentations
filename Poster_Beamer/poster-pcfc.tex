@@ -19,6 +19,21 @@
 \newcommand{\nox}{NO$_x$} % our abbreviation
 \usepackage{subfigure}
 
+\usepackage[
+backend=biber,
+doi=true,
+sorting=none,
+sortcites=true,
+maxbibnames=99,
+minbibnames=99,
+maxcitenames=2,
+mincitenames=1,
+citestyle=numeric-comp,
+giveninits=true,
+isbn=false,
+date=year
+]{biblatex}
+\addbibresource{../sample.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 \title{\huge Reaction Class-Based {CHON} Combustion Mechanism Development}
@@ -124,8 +139,7 @@
 			\end{block}
 			\vfill
 			\begin{block}{\LARGE REFERENCES}
-				 \bibliographystyle{amsplain}
-				\bibliography{../sample}
+				 \printbibliography
 			\end{block}
 		\end{beamercolorbox}
 	\end{column}

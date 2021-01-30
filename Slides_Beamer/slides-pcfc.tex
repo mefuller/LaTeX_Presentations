@@ -104,11 +104,11 @@
 \DeclareRobustCommand{\ILS}{\includegraphics[height=\fontcharht\font`T]{/home/fuller/Dropbox/Documents/TeX/ILS_bold}}
 
 %get proper bib with numbered entries
-\setbeamertemplate{bibliography item}{\insertbiblabel}
+%\setbeamertemplate{bibliography item}{\insertbiblabel}
 
 %footnote citations - replace \cite with \footcite or \footfullcite
 \usepackage[backend=bibtex, style=chem-acs]{biblatex} %, style=authoryear-comp
-\addbibresource{../sample}
+\addbibresource{../sample.bib}
 
 %shrink citations
 \setbeamerfont{footnote}{size=\tiny}
@@ -162,8 +162,6 @@
 \makeatother
 
 \newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
-
-
 
 \title{Progress in \soutthick{ Nitrogen } Novel Combustion Chemistry}
 %\subtitle{Subtitle}
@@ -284,5 +282,7 @@
 
 Units: centimeters, kelvin, calories, moles
 \end{frame}
+
+%\printbibliography
 
 \end{document}
