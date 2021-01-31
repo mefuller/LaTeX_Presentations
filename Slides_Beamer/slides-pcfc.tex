@@ -14,8 +14,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Select language
 %%
-\usepackage[ngerman]{babel}        % Deutsch, neue Rechtschreibung
-%\usepackage[english]{babel}       % English
+%\usepackage[ngerman]{babel}        % Deutsch, neue Rechtschreibung
+\usepackage[english]{babel}       % English
 
 \usetheme{rwth}
 \usepackage[T1]{fontenc}           % Font encoding (don't change!)
@@ -112,11 +112,16 @@
 %\setbeamertemplate{bibliography item}{\insertbiblabel}
 
 %footnote citations - replace \cite with \footcite or \footfullcite
-\usepackage[backend=bibtex, style=chem-acs]{biblatex} %, style=authoryear-comp
+\usepackage[backend=biber, style=chem-acs]{biblatex} %, style=authoryear-comp
 \addbibresource{../sample.bib}
 
 %shrink citations
 \setbeamerfont{footnote}{size=\tiny}
+
+%bibliography/citation style
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamercolor{bibliography item}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
 
 %no ``figure'' in caption
 \setbeamertemplate{caption}{\insertcaption} 
@@ -212,12 +217,10 @@
 \end{frame}
 
 
-\begin{frame}{Latest revisions}
+\begin{frame}{Citations}
     \begin{itemize}
-        \item The \ce{HNO2} potential energy surface (PES) reactions calculated by Chen {\it et al.}\footfullcite{Chen.2019}
-        \item Rates for the \ce{H2NO2} and \ce{CH4NO2} PES from Fuller and Goldsmith\footfullcite{Fuller.2018}
-        \item Hydrogen abstraction by \ce{NO2} from alkanes and alkenes refit to the exothermic direction\footfullcite{Fuller.2018, Fuller.2020}
-        \item Decomposition rates for alkyl nitrites\footfullcite{Randazzo.2018}, and isopropyl nitrate\footfullcite{Fuller.2019.A}
+        \item Regular (end) citation\cite{Fuller.2014}
+        \item Footnote\footfullcite{Fuller.2019}
     \end{itemize}
 \end{frame}
 
@@ -288,6 +291,6 @@
 Units: centimeters, kelvin, calories, moles
 \end{frame}
 
-%\printbibliography
+\printbibliography
 
 \end{document}
