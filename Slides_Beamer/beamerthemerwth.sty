@@ -306,26 +306,6 @@
 \mode<presentation>
 
 
-%
-% Ein paar Übersetzungen für deutsche/englische Folien
-%  (\languagename ist ein Makro, das vom Paket babel gesetzt wird)
-\AtBeginDocument{
-  \iflanguage{english}%
-  {% true
-    \def\mentoring@institute{Computer Science Mentoring}%
-    \def\mentoring@logotext{mentoringlogoschriftzugenglish}
-  }%
-  {% false
-    \def\mentoring@institute{Mentoring Informatik}%
-    \def\mentoring@logotext{mentoringlogoschriftzug}
-  }%
-  % Kommando bereitstellen um die Titelseite zu zentrieren
-  \newlength{\distfromleft}
-  \setlength{\distfromleft}{\Gm@lmargin/2}
-  \newcommand{\centertitleframe}{\hskip-\distfromleft}
-}
-
-
 \defbeamertemplate*{title page}{rwth theme}
 {
   \hbox{%

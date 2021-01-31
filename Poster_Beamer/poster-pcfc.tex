@@ -77,20 +77,7 @@ date=year
 	\iftoggle{bbx:url}
 	{\usebibmacro{url+urldate}}{}%
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%this isn't working exactly as desired, but it has potential:
-%https://tex.stackexchange.com/questions/74808/how-to-line-up-blocks-in-columns-with-full-width-blocks-in-beamer-beamerposter
-\newenvironment<>{varblock}[2][0.96\textwidth]{%
-	\setlength{\textwidth}{#1}
-	\begin{actionenv}#3%
-		\def\insertblocktitle{#2}%
-		\centering
-		\par%
-		\centering
-		\usebeamertemplate{block begin}}
-	{\par%
-		\usebeamertemplate{block end}%
-	\end{actionenv}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 \title{\huge Reaction Class-Based {CHON} Combustion Mechanism Development}
@@ -101,57 +88,8 @@ date=year
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \begin{frame} %whole poster is one frame
-	
-%%varblock styling (needs improvement)	
-%	  \begin{columns}[t,totalwidth=\linewidth]
-%		\begin{column}{.48\textwidth}
-%			\begin{varblock}{\LARGE Introduction}
-%				Blarg!
-%			\end{varblock}
-%		\end{column}
-%		\begin{column}{.48\linewidth}
-%			\begin{varblock}{\Large Problems are soluble}
-%	           	\begin{enumerate}
-%					\item Point 1
-%					\item Point 2
-%				\end{enumerate}	
-%			\end{varblock}
-%		\end{column}
-%	\end{columns}
-%	
-%	\begin{columns}
-%		\begin{column}{.98\textwidth}
-%			\begin{block}{Full-width block}
-%				\begin{multicols}{2}
-%					\includegraphics[width=0.9\columnwidth]{../figures/PCFC_ST.jpg}
-%					WOW!
-%					\columnbreak
-%					\begin{enumerate}
-%						\item Shock tubes are cool
-%						\item Ours is hot!
-%					\end{enumerate}	
-%				\end{multicols}
-%			\end{block}
-%		\end{column}
-%	\end{columns}
-%	
-%	\begin{columns}[t,totalwidth=\linewidth]
-%		\begin{column}{.5\linewidth}
-%			\begin{varblock}{\LARGE Split left}
-%				Test citation\cite{Fuller.2014}.
-%			\end{varblock}
-%		\end{column}
-%		\begin{column}{.5\linewidth}
-%			\begin{varblock}{\LARGE REFERENCES}
-%					\printbibliography
-%			\end{varblock}
-%		\end{column}
-%	\end{columns}	
-%\vfill
 
-
-%old style (more tedious, but ok)
-	\begin{columns}
+	\begin{columns}[T] %top-align
 	\begin{column}{.48\textwidth}
 		\begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
 			\begin{block}{\LARGE Introduction}
@@ -165,10 +103,6 @@ well-studied and may have significant effects
 feedstocks, \ce{CO2} , and renewable electricity, contain additional
 functional groups whose reactions with \nox\ are not well-characterized
 				\end{itemize}
-				\begin{figure}
-					\centering
-					\includegraphics[width=0.7\linewidth]{../figures/NOx_cycle.png}
-				\end{figure}
 			\end{block}
 		\end{beamercolorbox}
 	\end{column}
@@ -180,12 +114,8 @@ functional groups whose reactions with \nox\ are not well-characterized
 			\begin{block}{\LARGE Model Development}
 				\begin{itemize}
 					\item Pentane isomer mechanism (\ce{CHO}) of Bugler {\it et al.} utilized as \ce{C0}-\ce{C5} base mechanism
-				\end{itemize}
-				\vspace{5cm}
-				\begin{figure}
-					\centering
-					\includegraphics[width=0.7\linewidth]{../figures/NOx_Cycle.png}
-				\end{figure}	
+					\item A sample citation\cite{Fuller.2014}
+				\end{itemize}	
 			\end{block}
 		\end{beamercolorbox}
 	\end{column}
@@ -201,23 +131,50 @@ functional groups whose reactions with \nox\ are not well-characterized
 						\centering
 						\includegraphics[width=0.8\linewidth]{../figures/NOx_cycle.png}
 					\end{figure}
+					\centering
 					WOW!
 					\columnbreak
 					\begin{figure}
 						\centering
 						\includegraphics[width=0.8\linewidth]{../figures/NOx_cycle.png}
+						\caption{Check this shit out!}
 					\end{figure}
-					Check this shit out!
-					
 				\end{multicols}
 			\end{block}
 			%\vfill
 		\end{beamercolorbox}
+	
+		\begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+		\begin{block}{\LARGE Rapid Compression Machine (RCM)}
+			\begin{multicols}{3}
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.96\linewidth]{../figures/PCFC_RCM.jpg}
+					\caption{PCFC RCM Facility}
+				\end{figure}
+				\columnbreak
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.96\linewidth]{../figures/RCM_typical.png}
+					\caption{Characteristic RCM ignition experiments}
+				\end{figure}
+				\columnbreak
+				\null \vfill
+				\begin{itemize}
+					\item Ignition delay time (IDT) measurements 2 to 200 ms
+					\item Variable compression ratio 9 - 32
+					\item End-of-compression pressure up to 100 bar, peak 1000 bar allowed
+				\end{itemize}
+				\vfill \null
+			\end{multicols}
+		\end{block}	
+	\end{beamercolorbox}
+
 	\end{column}
 \end{columns}
 
 %back to left /right columns
-\begin{columns}
+\begin{columns}[T] %top-align
 	\begin{column}{.48\textwidth}
 		\begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
 			\begin{block}{\LARGE Work-in-progress}
@@ -231,8 +188,7 @@ functional groups whose reactions with \nox\ are not well-characterized
 	\begin{column}{.48\textwidth}
 		\begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
 			\begin{block}{\LARGE REFERENCES}
-				\printbibliography
-				
+				\printbibliography	
 			\end{block}
 		\end{beamercolorbox}
 	\end{column}
