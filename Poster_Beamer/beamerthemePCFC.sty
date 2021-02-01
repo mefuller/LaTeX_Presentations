@@ -7,6 +7,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{RWTHcolors}
+\RequirePackage{tikz}
 \RequirePackage{pstricks}
 \RequirePackage{pst-grad}
 \selectcolormodel{cmyk}
@@ -53,17 +54,40 @@
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 \setbeamercolor{bibliography item}{fg=black}
 \setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
 
 %no ``figure'' in caption
-\setbeamertemplate{caption}{\insertcaption} 
+\setbeamertemplate{caption}{\insertcaption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%define block header color fade: horizontal shade from 15% to 85% transparent
+\usetikzlibrary{fadings}
+\begin{tikzfadingfrompicture}[name=fade right]
+	\shade[left color=transparent!15,
+	right color=transparent!85] (0,0) rectangle (2,2);
+\end{tikzfadingfrompicture}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setbeamertemplate{block begin}{
 	\vskip.75ex
-	\begin{beamercolorbox}[ht=6ex,colsep*=.75ex]{block title}%
-		\usebeamerfont*{block title}%
-		{\phantom{$^1$Gg}\insertblocktitle}% phantom because of baseline problem
-	\end{beamercolorbox}%
+
+	%make a box that is just the fading the color
+	\hbox{\tikz\fill[scale=1.0,path fading= fade right, rwthorange] (0,0) rectangle (\linewidth, 3em);}
+
+	%vertically back up the height of the box (could probably create a variable to force these same)
+	\vspace{-3em}
+
+	%use Beamer to draw title box on top of tikz faded box
+	\hbox{\pgfsetfillopacity{0} %beamer background color is made fully transparent
+		\begin{beamercolorbox}[ht=6ex,colsep*=.75ex]{block title}%
+			\usebeamerfont*{block title}
+			\pgfsetfillopacity{1} %Beamer foreground color (text) made fully opaque
+			{\phantom{$^1$Gg}\insertblocktitle}% phantom is vestigial code to get Beamer color box properly vertically aligned
+		\end{beamercolorbox}%
+	}
+
 	{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
 	\usebeamerfont{block body}%
 	\begin{beamercolorbox}[leftskip=1em,colsep*=.75ex,sep=0.5ex,vmode]{block body}%
@@ -74,12 +98,12 @@
 }
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{headline}{  
+\setbeamertemplate{headline}{
 	\leavevmode
 	\begin{beamercolorbox}[wd=\paperwidth]{headline}
 		\begin{columns}[T]
 			\begin{column}{.02\paperwidth}
-				%page margin	
+				%page margin
 			\end{column}
   	  		\begin{column}{.2\paperwidth}
 				%\vskip2ex
@@ -133,7 +157,7 @@
 %   \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
 %     \rule{0pt}{3pt}
 %   \end{beamercolorbox}
-  
+
 %   \leavevmode%
 %   \begin{beamercolorbox}[ht=4ex,leftskip=1em,rightskip=1em]{author in head/foot}%
 %     \texttt{Bacharelado em Ciência da Computação - http://www.sp.senac.br/bcc}
@@ -166,7 +190,7 @@
 \setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-PDF-mode: t
 %%% TeX-master: "poster-surf"
