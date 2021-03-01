@@ -1,0 +1,198 @@
+%Poster theme for use by PCFC / HGD / SWL, etc. (Prof. K. Alexander Heufer)
+%Developed by Mark E. Fuller from RWTH standard colors and current PPT template
+%Copyright Mark E. Fuller, 2021 (mark.e.fuller@gmx.de)
+%(but derivative of the work of Philippe Dreuw and Thomas Deselaers)
+
+\ProvidesPackage{beamerthemeTechnionPoster}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{../common/Technioncolors}
+%\RequirePackage{../common/RWTHcolors}
+\RequirePackage{tikz}
+\RequirePackage{pstricks}
+\RequirePackage{pst-grad}
+\selectcolormodel{cmyk}
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamercolor{headline}{fg=black,bg=white}
+\setbeamerfont{headline}{size=\LARGE}
+\setbeamercolor{footline}{fg=tgolden, bg=tdeepblue}
+\setbeamerfont{footline}{size=\large,series=\tt}
+\setbeamercolor{separation line}{bg=black}
+\setbeamercolor{title in headline}{fg=black}
+\setbeamercolor{author in headline}{fg=black}
+\setbeamercolor{institute in headline}{fg=black}
+
+\setbeamercolor{framesubtitle}{fg=tgolden, bg=tdeepblue}
+\setbeamercolor{author in head/foot}{fg=black, bg=rwthpetrol}
+\setbeamercolor{title in head/foot}{fg=black, bg=rwthpetrol}
+
+\setbeamercolor*{normal text}{fg=black, bg=white}
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamercolor*{block title}{fg=black,bg=tgolden}
+\setbeamerfont{block title}{size=\Large,series=\bf}
+\setbeamercolor{upper separation line head}{fg=black}
+\setbeamercolor{lower separation line head}{fg=black}
+
+\setbeamercolor*{example body}{fg=tdeepblue,bg=black}
+\setbeamercolor*{example text}{fg=tdeepblue,bg=black}
+\setbeamercolor*{example title}{bg=black,fg=tgolden}
+
+%\setbeamercolor{alerted text}{fg=rwthlightblue}
+
+%\setbeamercolor{example text}{fg=taorange}
+\setbeamercolor{structure}{fg=tdeepblue}
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%special bonus fade on block headers
+%not yet implemented
+
+%bibliography style
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamercolor{bibliography item}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+
+%no ``figure'' in caption
+\setbeamertemplate{caption}{\insertcaption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%define block header color fade: horizontal shade from 15% to 85% transparent
+\usetikzlibrary{fadings}
+\begin{tikzfadingfrompicture}[name=fade right]
+	\shade[left color=transparent!15,
+	right color=transparent!85] (0,0) rectangle (2,2);
+\end{tikzfadingfrompicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{block begin}{
+	\vskip.75ex
+
+	%make a box that is just the fading the color
+	\hbox{\tikz\fill[scale=1.0,path fading= fade right, tgolden] (0,0) rectangle (\linewidth, 3em);}
+
+	%vertically back up the height of the box (could probably create a variable to force these same)
+	\vspace{-3em}
+
+	%use Beamer to draw title box on top of tikz faded box
+	\hbox{\pgfsetfillopacity{0} %beamer background color is made fully transparent
+		\begin{beamercolorbox}[ht=6ex,colsep*=.75ex]{block title}%
+			\usebeamerfont*{block title}
+			\pgfsetfillopacity{1} %Beamer foreground color (text) made fully opaque
+			{\phantom{$^1$Gg}\insertblocktitle}% phantom is vestigial code to get Beamer color box properly vertically aligned
+		\end{beamercolorbox}%
+	}
+
+	{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+	\usebeamerfont{block body}%
+	\begin{beamercolorbox}[leftskip=1em,colsep*=.75ex,sep=0.5ex,vmode]{block body}%
+		\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+	}
+	\setbeamertemplate{block end}{
+	\end{beamercolorbox}
+}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{
+	\leavevmode
+	\begin{beamercolorbox}[wd=\paperwidth]{headline}
+		\begin{columns}[T]
+			\begin{column}{.02\paperwidth}
+				%page margin
+			\end{column}
+  	  		\begin{column}{.2\paperwidth}
+				%\vskip2ex
+				%conference name
+				\raggedleft
+				10th European Combustion Meeting
+  	  		\end{column}
+       		\begin{column}{.01\paperwidth}
+    			%page margin
+    		\end{column}
+			\vrule
+       		\begin{column}{.01\paperwidth}
+    			%page margin
+    		\end{column}
+  	  		\begin{column}{.2\paperwidth}
+  	  			\vskip3ex
+	   			%conference date/location
+	   			April 14 - 15, 2021\\
+	   			Virtual%Napoli, Italy
+      		\end{column}
+      		\begin{column}{.54\paperwidth}
+       		%\vskip2ex
+       		%logos
+        	\raggedleft
+        	\includegraphics[width=.6\linewidth]{../figures/Logos/Technion/Technion_ChemE.png}
+        	%other logos?
+			\end{column}
+	        \begin{column}{.02\paperwidth}
+	        	%page margin
+	        \end{column}
+		\end{columns}
+	\end{beamercolorbox}
+	\vskip0.4ex
+	\begin{beamercolorbox}[wd=\paperwidth]{black}
+		\centering
+		\rule{0.96\paperwidth}{5pt}
+	\end{beamercolorbox}
+	\vskip2.0ex
+	\null \hfill
+	\begin{beamercolorbox}[wd=0.9\paperwidth]{block body}
+		\centering
+		\usebeamercolor{title in headline}{\color{fg}\textbf{\large{\inserttitle}}\\[1ex]}
+		\usebeamercolor{author in headline}{\color{fg}\normalsize{\insertauthor}\\[1ex]}
+		\usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}
+	\end{beamercolorbox}
+	\hfill \null
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setbeamertemplate{footline}{
+%   \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+%     \rule{0pt}{3pt}
+%   \end{beamercolorbox}
+
+%   \leavevmode%
+%   \begin{beamercolorbox}[ht=4ex,leftskip=1em,rightskip=1em]{author in head/foot}%
+%     \texttt{Bacharelado em Ciência da Computação - http://www.sp.senac.br/bcc}
+%     \hfill
+%     \texttt{E-COMP 2014}
+%     \vskip1ex
+%   \end{beamercolorbox}
+%   \vskip0pt%
+%   \begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+%     \rule{0pt}{3pt}
+%   \end{beamercolorbox}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display a grid to help align images ... and it looks nice with this color scheme
+%\beamertemplategridbackground[1cm]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>
+
+% adapt height of itemize rectangles
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize item}{\raisebox{0.12ex}{$\blacktriangleright$}\hskip0.1em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.1em}
+% or define your own template using \defbeamertemplate{itemize item}, see beameruserguide.pdf
+
+% equal font sizes for all levels
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "poster-surf"
+%%% End:
